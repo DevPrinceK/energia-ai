@@ -1,3 +1,5 @@
+import 'package:energia_dashboard/components/desktop/desktop_dashboard_main_content.dart';
+import 'package:energia_dashboard/components/desktop/desktop_sidebar.dart';
 import 'package:flutter/material.dart';
 
 class DesktopDashboard extends StatelessWidget {
@@ -7,11 +9,15 @@ class DesktopDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.menu),
+        leading: Container(
+          margin: const EdgeInsets.only(left: 20),
+          child: Image.asset("assets/images/logo.jpg"),
+        ),
         title: const Text(
           'Energia AI',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        elevation: 1,
         centerTitle: true,
         actions: [
           Container(
@@ -39,6 +45,15 @@ class DesktopDashboard extends StatelessWidget {
             ),
           )
         ],
+      ),
+      body: const Padding(
+        padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+        child: Row(
+          children: [
+            DesktopSidebar(),
+            DesktopDashboardMainContent(),
+          ],
+        ),
       ),
     );
   }
