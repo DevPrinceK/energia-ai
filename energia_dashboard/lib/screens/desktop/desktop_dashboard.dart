@@ -16,7 +16,7 @@ class DesktopDashboard extends StatelessWidget {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             height: 50,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
