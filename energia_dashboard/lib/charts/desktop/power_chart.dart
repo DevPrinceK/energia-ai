@@ -6,11 +6,16 @@ class PowerData {
   final double generation;
   final double consumption;
 
-  PowerData(this.region, this.generation, this.consumption);
+  PowerData(
+    this.region,
+    this.generation,
+    this.consumption,
+  );
 }
 
 class PowerChart extends StatelessWidget {
-  PowerChart({super.key});
+  final double heightFactor;
+  PowerChart({super.key, this.heightFactor = 0.25});
   final List<PowerData> data = [
     PowerData('Ashanti Region', 5000, 5400),
     PowerData('Greater Accra Region', 5100, 5400),
@@ -26,28 +31,32 @@ class PowerChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: SfCartesianChart(
-        primaryXAxis: CategoryAxis(isVisible: true, labelRotation: 45),
-        primaryYAxis: NumericAxis(isVisible: true),
-        series: <ChartSeries<PowerData, String>>[
-          StackedLineSeries<PowerData, String>(
-            dataSource: data,
-            xValueMapper: (PowerData power, _) => power.region,
-            yValueMapper: (PowerData power, _) => power.generation,
-            name: 'Power Generation',
+    double deviceWidth = MediaQuery.of(context).size.width;
+    return SizedBox(
+      height: deviceWidth * heightFactor,
+      child: Card(
+        child: SfCartesianChart(
+          primaryXAxis: CategoryAxis(isVisible: true, labelRotation: 45),
+          primaryYAxis: NumericAxis(isVisible: true),
+          series: <ChartSeries<PowerData, String>>[
+            StackedLineSeries<PowerData, String>(
+              dataSource: data,
+              xValueMapper: (PowerData power, _) => power.region,
+              yValueMapper: (PowerData power, _) => power.generation,
+              name: 'Power Generation',
+            ),
+            StackedLineSeries<PowerData, String>(
+              dataSource: data,
+              xValueMapper: (PowerData power, _) => power.region,
+              yValueMapper: (PowerData power, _) => power.consumption,
+              name: 'Power Consumption',
+            ),
+          ],
+          legend: const Legend(
+            isResponsive: true,
+            isVisible: true,
+            position: LegendPosition.top,
           ),
-          StackedLineSeries<PowerData, String>(
-            dataSource: data,
-            xValueMapper: (PowerData power, _) => power.region,
-            yValueMapper: (PowerData power, _) => power.consumption,
-            name: 'Power Consumption',
-          ),
-        ],
-        legend: const Legend(
-          isResponsive: true,
-          isVisible: true,
-          position: LegendPosition.top,
         ),
       ),
     );
