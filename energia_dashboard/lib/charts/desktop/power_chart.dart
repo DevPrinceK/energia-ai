@@ -26,27 +26,29 @@ class PowerChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SfCartesianChart(
-      primaryXAxis: CategoryAxis(isVisible: true, labelRotation: 45),
-      primaryYAxis: NumericAxis(isVisible: true),
-      series: <ChartSeries<PowerData, String>>[
-        StackedLineSeries<PowerData, String>(
-          dataSource: data,
-          xValueMapper: (PowerData power, _) => power.region,
-          yValueMapper: (PowerData power, _) => power.generation,
-          name: 'Power Generation',
+    return Card(
+      child: SfCartesianChart(
+        primaryXAxis: CategoryAxis(isVisible: true, labelRotation: 45),
+        primaryYAxis: NumericAxis(isVisible: true),
+        series: <ChartSeries<PowerData, String>>[
+          StackedLineSeries<PowerData, String>(
+            dataSource: data,
+            xValueMapper: (PowerData power, _) => power.region,
+            yValueMapper: (PowerData power, _) => power.generation,
+            name: 'Power Generation',
+          ),
+          StackedLineSeries<PowerData, String>(
+            dataSource: data,
+            xValueMapper: (PowerData power, _) => power.region,
+            yValueMapper: (PowerData power, _) => power.consumption,
+            name: 'Power Consumption',
+          ),
+        ],
+        legend: const Legend(
+          isResponsive: true,
+          isVisible: true,
+          position: LegendPosition.top,
         ),
-        StackedLineSeries<PowerData, String>(
-          dataSource: data,
-          xValueMapper: (PowerData power, _) => power.region,
-          yValueMapper: (PowerData power, _) => power.consumption,
-          name: 'Power Consumption',
-        ),
-      ],
-      legend: const Legend(
-        isResponsive: true,
-        isVisible: true,
-        position: LegendPosition.top,
       ),
     );
   }
