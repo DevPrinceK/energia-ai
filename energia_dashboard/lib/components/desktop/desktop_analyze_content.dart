@@ -1,4 +1,7 @@
+import 'package:energia_dashboard/charts/desktop/districts_chart.dart';
+import 'package:energia_dashboard/charts/desktop/population_chart.dart';
 import 'package:energia_dashboard/charts/desktop/power_chart.dart';
+import 'package:energia_dashboard/charts/desktop/towns_chart.dart';
 import 'package:energia_dashboard/components/desktop/desktop_footer.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +14,10 @@ class DesktopAnalyzeContent extends StatefulWidget {
 
 class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
   bool closeAlert = false;
+  bool performingAnalysis = false;
+  String selectedRegion = "Region";
+  String selectedMetric = "Power";
+  Widget activeChart = PowerChart(heightFactor: 0.3);
 
   @override
   Widget build(BuildContext context) {
@@ -80,19 +87,140 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                         ],
                       ),
                     ),
-              // const PopulationChart(),
               const SizedBox(height: 20),
-              const Text(
-                "Analysis of Power consumption and Generation",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      offset: Offset(0, 1),
+                      blurRadius: 5,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    DropdownButton<String>(
+                      value: selectedRegion,
+                      items: const [
+                        DropdownMenuItem(
+                          value: "Region",
+                          child: Text("Region"),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          selectedRegion = value!;
+                        });
+                      },
+                      style: const TextStyle(
+                        color: Colors.black, // Set the text color
+                        fontSize: 16, // Set the text size
+                      ),
+                      dropdownColor:
+                          Colors.white, // Set the dropdown background color
+                    ),
+                    const SizedBox(width: 20),
+                    DropdownButton<String>(
+                      value: selectedMetric,
+                      items: const [
+                        DropdownMenuItem(
+                          value: "Power",
+                          child: Text("Power"),
+                        ),
+                        DropdownMenuItem(
+                          value: "Districts",
+                          child: Text("Districts"),
+                        ),
+                        DropdownMenuItem(
+                          value: "Towns",
+                          child: Text("Towns"),
+                        ),
+                        DropdownMenuItem(
+                          value: "Population",
+                          child: Text("Population"),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        if (value == "Population") {
+                          setState(() {
+                            activeChart = PopulationChart(heightFactor: 0.4);
+                          });
+                        } else if (value == "Towns") {
+                          setState(
+                            () {
+                              activeChart = TownChart(heightFactor: 0.3);
+                            },
+                          );
+                        } else if (value == "Districts") {
+                          setState(() {
+                            activeChart = DistrictsChart(heightFactor: 0.3);
+                          });
+                        } else {
+                          setState(() {
+                            activeChart = PowerChart(heightFactor: 0.3);
+                          });
+                        }
+                        setState(() {
+                          selectedMetric = value!;
+                        });
+                      },
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                      dropdownColor: Colors.white,
+                    ),
+                    const Spacer(),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          performingAnalysis = !performingAnalysis;
+                        });
+                      },
+                      child: const Text("Generate Report"),
+                    ),
+                  ],
+                ),
               ),
-              PowerChart(),
               const SizedBox(height: 20),
-              const Text(
-                "Analysis of Population Per Region",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              PowerChart(),
+              if (selectedMetric == "Population")
+                const Text(
+                  "Analysis of Population by Region",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )
+              else if (selectedMetric == "Towns")
+                const Text("Analysis of Towns by Region")
+              else if (selectedMetric == "Districts")
+                const Text("Analysis of Districts by Region")
+              else
+                const Text(
+                  "Analysis of Power consumption and Generation",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              performingAnalysis
+                  ? const Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          SizedBox(
+                            height: 400,
+                            width: 400,
+                            child: CircularProgressIndicator(),
+                          ),
+                          Center(
+                            child: Text(
+                              "Generating Report...",
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : activeChart,
+              const SizedBox(height: 20),
               const DesktopFooter(),
             ],
           ),
