@@ -50,7 +50,7 @@ class DesktopDashboard extends StatelessWidget {
         padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
         child: Row(
           children: [
-            DesktopSidebar(),
+            DesktopSidebar(dashboardActive: true),
             DesktopDashboardMainContent(),
           ],
         ),
