@@ -36,7 +36,7 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                   TextButton(
                     onPressed: () {},
                     child: const Text(
-                      "Predict",
+                      "Prediction",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -86,13 +86,8 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                 "Prediction of Power consumption and Generation",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              PowerChart(),
-              const SizedBox(height: 20),
-              const Text(
-                "Analysis of Population Per Region",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              PowerChart(),
+              SizedBox(height: deviceWidth * 0.32),
+              // const Spacer(),
               const DesktopFooter(),
             ],
           ),
