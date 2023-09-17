@@ -1,9 +1,9 @@
-import 'package:energia_dashboard/components/desktop/desktop_dashboard_main_content.dart';
+import 'package:energia_dashboard/components/desktop/desktop_analyze_content.dart';
 import 'package:energia_dashboard/components/desktop/desktop_sidebar.dart';
 import 'package:flutter/material.dart';
 
-class DesktopDashboard extends StatelessWidget {
-  const DesktopDashboard({super.key});
+class DesktopAnalyze extends StatelessWidget {
+  const DesktopAnalyze({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +50,8 @@ class DesktopDashboard extends StatelessWidget {
         padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
         child: Row(
           children: [
-            DesktopSidebar(dashboardActive: true),
-            DesktopDashboardMainContent(),
+            DesktopSidebar(analyzeActive: true),
+            DesktopAnalyzeContent(),
           ],
         ),
       ),
