@@ -174,6 +174,13 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                       ),
                       dropdownColor: Colors.white,
                     ),
+                    const SizedBox(width: 20),
+                    const Spacer(),
+                    Container(
+                      height: 40,
+                      width: 2,
+                      color: Colors.grey[200],
+                    ),
                     const Spacer(),
                     ElevatedButton(
                       onPressed: () {
