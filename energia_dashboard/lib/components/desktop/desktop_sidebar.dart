@@ -1,6 +1,7 @@
 import 'package:energia_dashboard/screens/desktop/desktop_analyze.dart';
 import 'package:energia_dashboard/screens/desktop/desktop_dashboard.dart';
 import 'package:energia_dashboard/screens/desktop/desktop_forecast.dart';
+import 'package:energia_dashboard/screens/desktop/desktop_login.dart';
 import 'package:energia_dashboard/screens/desktop/desktop_predict.dart';
 import 'package:flutter/material.dart';
 
@@ -94,10 +95,20 @@ class DesktopSidebar extends StatelessWidget {
             },
           ),
           const Spacer(),
-          const ListTile(
+          ListTile(
             selectedTileColor: Colors.red,
-            leading: Icon(Icons.power_settings_new_outlined),
-            title: Text("Sign Out"),
+            leading: const Icon(Icons.power_settings_new_outlined),
+            title: const Text("Sign Out"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const DesktopLogin();
+                  },
+                ),
+              );
+            },
           ),
         ],
       ),
