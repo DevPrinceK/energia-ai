@@ -1,4 +1,6 @@
 import 'package:energia_dashboard/charts/desktop/power_chart.dart';
+import 'package:energia_dashboard/charts/desktop/region_power_con_chart.dart';
+import 'package:energia_dashboard/charts/desktop/region_power_gen_chart.dart';
 import 'package:energia_dashboard/components/desktop/desktop_footer.dart';
 import 'package:flutter/material.dart';
 
@@ -77,10 +79,17 @@ class _DesktopDashboardMainContentState
               PowerChart(),
               const SizedBox(height: 20),
               const Text(
-                "Power consumption and Generation",
+                "Power Generation by Region",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              PowerChart(),
+              RegionPowerGenChart(heightFactor: 0.3),
+              const SizedBox(height: 20),
+              const Text(
+                "Power Consumption by Region",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              RegionPowerConChart(heightFactor: 0.3),
+              //  const SizedBox(height: 20),
               const DesktopFooter(),
             ],
           ),
