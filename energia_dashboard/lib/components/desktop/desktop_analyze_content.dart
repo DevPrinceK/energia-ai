@@ -194,7 +194,9 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                 ),
               ),
               const SizedBox(height: 20),
-              if (selectedMetric == "Population")
+              if (performingAnalysis == true)
+                const Text("Analyzing Data...")
+              else if (selectedMetric == "Population")
                 const Text(
                   "Analysis of Population by Region",
                   style: TextStyle(fontWeight: FontWeight.bold),
