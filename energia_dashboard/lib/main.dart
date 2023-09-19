@@ -1,4 +1,4 @@
-import 'package:energia_dashboard/screens/desktop/desktop_dashboard.dart';
+import 'package:energia_dashboard/screens/desktop/desktop_login.dart';
 import 'package:energia_dashboard/screens/mobile/mobile_dashboard.dart';
 import 'package:energia_dashboard/screens/responsive.dart';
 import 'package:energia_dashboard/screens/tablet/tablet_dashboard.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       home: const ResponsiveScreen(
         mobile: MobileDashboard(),
         tablet: TabletDashboard(),
-        desktop: DesktopDashboard(),
+        desktop: DesktopLogin(),
       ),
     );
   }
