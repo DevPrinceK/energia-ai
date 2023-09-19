@@ -17,16 +17,16 @@ class PowerChart extends StatelessWidget {
   final double heightFactor;
   PowerChart({super.key, this.heightFactor = 0.25});
   final List<PowerData> data = [
-    PowerData('Ashanti Region', 5000, 5400),
-    PowerData('Greater Accra Region', 5100, 5400),
-    PowerData('Central Region', 6000, 4000),
-    PowerData('Northern Region', 5500, 5000),
-    PowerData('Western Region', 5000, 5400),
-    PowerData('Eastern Region', 5090, 3400),
-    PowerData('Volta Region', 5001, 4000),
-    PowerData('Brong-Ahafo Region', 3800, 5400),
-    PowerData('Upper East Region', 5000, 4500),
-    PowerData('Upper West Region', 5900, 2000),
+    PowerData('Ashanti', 5000, 5400),
+    PowerData('Greater Accra', 5100, 5400),
+    PowerData('Central', 6000, 4000),
+    PowerData('Northern', 5500, 5000),
+    PowerData('Western', 5000, 5400),
+    PowerData('Eastern', 5090, 3400),
+    PowerData('Volta', 5001, 4000),
+    PowerData('Brong-Ahafo', 3800, 5400),
+    PowerData('Upper East', 5000, 4500),
+    PowerData('Upper West', 5900, 2000),
   ];
 
   @override
@@ -36,8 +36,15 @@ class PowerChart extends StatelessWidget {
       height: deviceWidth * heightFactor,
       child: Card(
         child: SfCartesianChart(
-          primaryXAxis: CategoryAxis(isVisible: true, labelRotation: 45),
-          primaryYAxis: NumericAxis(isVisible: true),
+          primaryXAxis: CategoryAxis(
+            isVisible: true,
+            labelRotation: 45,
+            title: AxisTitle(text: "Regions"),
+          ),
+          primaryYAxis: NumericAxis(
+            isVisible: true,
+            title: AxisTitle(text: "Power"),
+          ),
           series: <ChartSeries<PowerData, String>>[
             StackedLineSeries<PowerData, String>(
               dataSource: data,
