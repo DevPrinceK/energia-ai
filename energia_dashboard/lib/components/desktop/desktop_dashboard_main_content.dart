@@ -3,6 +3,7 @@ import 'package:energia_dashboard/charts/desktop/region_power_con_chart.dart';
 import 'package:energia_dashboard/charts/desktop/region_power_gen_chart.dart';
 import 'package:energia_dashboard/components/desktop/desktop_footer.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DesktopDashboardMainContent extends StatefulWidget {
   const DesktopDashboardMainContent({super.key});
@@ -15,6 +16,25 @@ class DesktopDashboardMainContent extends StatefulWidget {
 class _DesktopDashboardMainContentState
     extends State<DesktopDashboardMainContent> {
   bool closeAlert = false;
+  String userFullname = "";
+  String userEmail = "";
+  String userToken = "";
+
+  void getUserInfo() async {
+    // initialize shared preferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userEmail = prefs.getString("email")!;
+      userFullname = prefs.getString("fullname")!;
+      userToken = prefs.getString("token")!;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +48,9 @@ class _DesktopDashboardMainContentState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              const Text(
-                "Hey, Prince",
-                style: TextStyle(
+              Text(
+                "Hey, $userFullname",
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
