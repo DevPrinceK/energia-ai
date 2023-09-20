@@ -86,6 +86,53 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                 "Prediction of Power consumption and Generation",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: deviceWidth * 0.36,
+                    height: deviceWidth * 0.36,
+                    child: const Card(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Parameters",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: deviceWidth * 0.36,
+                    height: deviceWidth * 0.36,
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            const Text(
+                              "Prediction",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Image.asset("assets/images/lights-on-1.png"),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: deviceWidth * 0.32),
               // const Spacer(),
               const DesktopFooter(),
