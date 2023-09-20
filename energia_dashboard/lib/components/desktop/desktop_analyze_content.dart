@@ -15,9 +15,56 @@ class DesktopAnalyzeContent extends StatefulWidget {
 class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
   bool closeAlert = false;
   bool performingAnalysis = false;
-  String selectedRegion = "Region";
+  String selectedRegion = "Ahafo Region";
+  String selectedDistrict = "District One";
+  String selectedTown = "Town One";
+  String selectedGrid = "Grid One";
   String selectedMetric = "Power";
+  String filterBy = "All";
   Widget activeChart = PowerChart(heightFactor: 0.3);
+
+  List<String> regions = [
+    "Ahafo Region",
+    "Ashanti Region",
+    "Bono East Region",
+    "Brong-Ahafo Region",
+    "Central Region",
+    "Eastern Region",
+    "Greater Accra Region",
+    "North East Region",
+    "Northern Region",
+    "Oti Region",
+    "Savannah Region",
+    "Upper East Region",
+    "Upper West Region",
+    "Volta Region",
+    "Western North Region",
+    "Western Region",
+  ];
+
+  List<String> districts = [
+    "Distric One",
+    "Distric Two",
+    "Distric Three",
+    "Distric Four",
+    "Distric Five",
+  ];
+
+  List<String> towns = [
+    "Town One",
+    "Town Two",
+    "Town Three",
+    "Town Four",
+    "Town Five",
+  ];
+
+  List<String> grids = [
+    "Grid One",
+    "Grid Two",
+    "Grid Three",
+    "Grid Four",
+    "Grid Five",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -88,8 +135,10 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                       ),
                     ),
               const SizedBox(height: 20),
+              // type of report - button groups
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -103,96 +152,268 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                 ),
                 child: Row(
                   children: [
-                    DropdownButton<String>(
-                      value: selectedRegion,
-                      items: const [
-                        DropdownMenuItem(
-                          value: "Region",
-                          child: Text("Region"),
-                        ),
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          selectedRegion = value!;
-                        });
-                      },
-                      style: const TextStyle(
-                        color: Colors.black, // Set the text color
-                        fontSize: 16, // Set the text size
-                      ),
-                      dropdownColor:
-                          Colors.white, // Set the dropdown background color
-                    ),
-                    const SizedBox(width: 20),
-                    DropdownButton<String>(
-                      value: selectedMetric,
-                      items: const [
-                        DropdownMenuItem(
-                          value: "Power",
-                          child: Text("Power"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Districts",
-                          child: Text("Districts"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Towns",
-                          child: Text("Towns"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Population",
-                          child: Text("Population"),
-                        ),
-                      ],
-                      onChanged: (value) {
-                        if (value == "Population") {
-                          setState(() {
-                            activeChart = PopulationChart(heightFactor: 0.4);
-                          });
-                        } else if (value == "Towns") {
-                          setState(
-                            () {
-                              activeChart = TownChart(heightFactor: 0.3);
-                            },
-                          );
-                        } else if (value == "Districts") {
-                          setState(() {
-                            activeChart = DistrictsChart(heightFactor: 0.3);
-                          });
-                        } else {
-                          setState(() {
-                            activeChart = PowerChart(heightFactor: 0.3);
-                          });
-                        }
-                        setState(() {
-                          selectedMetric = value!;
-                        });
-                      },
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                      ),
-                      dropdownColor: Colors.white,
-                    ),
-                    const SizedBox(width: 20),
-                    const Spacer(),
-                    Container(
-                      height: 40,
-                      width: 2,
-                      color: Colors.grey[200],
-                    ),
-                    const Spacer(),
                     ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: filterBy == "Regions"
+                              ? MaterialStateProperty.all(Colors.blue)
+                              : null),
                       onPressed: () {
                         setState(() {
-                          performingAnalysis = !performingAnalysis;
+                          filterBy = "Regions";
                         });
                       },
-                      child: const Text("Generate Report"),
+                      child: const Text("Regions"),
                     ),
+                    const SizedBox(width: 20),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: filterBy == "Districts"
+                              ? MaterialStateProperty.all(Colors.blue)
+                              : null),
+                      onPressed: () {
+                        setState(() {
+                          filterBy = "Districts";
+                        });
+                      },
+                      child: const Text("Districts"),
+                    ),
+                    const SizedBox(width: 20),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: filterBy == "Towns"
+                              ? MaterialStateProperty.all(Colors.blue)
+                              : null),
+                      onPressed: () {
+                        setState(() {
+                          filterBy = "Towns";
+                        });
+                      },
+                      child: const Text("Towns"),
+                    ),
+                    const SizedBox(width: 20),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: filterBy == "Grids"
+                              ? MaterialStateProperty.all(Colors.blue)
+                              : null),
+                      onPressed: () {
+                        setState(() {
+                          filterBy = "Grids";
+                        });
+                      },
+                      child: const Text("Grids"),
+                    ),
+                    const SizedBox(width: 20),
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
+              Text("Filter by $filterBy"),
+              const SizedBox(height: 4),
+              if (filterBy == "Districts")
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0, 1),
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      DropdownButton<String>(
+                        value: selectedRegion,
+                        items: regions.map((region) {
+                          return DropdownMenuItem<String>(
+                            value: region,
+                            child: Text(region),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedRegion = value!;
+                          });
+                        },
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                        dropdownColor: Colors.white,
+                      ),
+                      const SizedBox(width: 20),
+                      const Spacer(),
+                      Container(
+                        height: 40,
+                        width: 2,
+                        color: Colors.grey[200],
+                      ),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            performingAnalysis = !performingAnalysis;
+                          });
+                        },
+                        child: const Text("Generate Report"),
+                      ),
+                    ],
+                  ),
+                )
+              else if (filterBy == "Towns")
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0, 1),
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      DropdownButton<String>(
+                        value: selectedRegion,
+                        items: regions.map((region) {
+                          return DropdownMenuItem<String>(
+                            value: region,
+                            child: Text(region),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedRegion = value!;
+                          });
+                        },
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                        dropdownColor: Colors.white,
+                      ),
+                      const SizedBox(width: 20),
+                      DropdownButton<String>(
+                        value: selectedTown,
+                        items: towns.map((region) {
+                          return DropdownMenuItem<String>(
+                            value: region,
+                            child: Text(region),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedTown = value!;
+                          });
+                        },
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                        dropdownColor: Colors.white,
+                      ),
+                      const SizedBox(width: 20),
+                      const Spacer(),
+                      Container(
+                        height: 40,
+                        width: 2,
+                        color: Colors.grey[200],
+                      ),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            performingAnalysis = !performingAnalysis;
+                          });
+                        },
+                        child: const Text("Generate Report"),
+                      ),
+                    ],
+                  ),
+                )
+              else if (filterBy == "Grids")
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0, 1),
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      DropdownButton<String>(
+                        value: selectedRegion,
+                        items: regions.map((region) {
+                          return DropdownMenuItem<String>(
+                            value: region,
+                            child: Text(region),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedRegion = value!;
+                          });
+                        },
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                        dropdownColor: Colors.white,
+                      ),
+                      const SizedBox(width: 20),
+                      DropdownButton<String>(
+                        value: selectedGrid,
+                        items: grids.map((region) {
+                          return DropdownMenuItem<String>(
+                            value: region,
+                            child: Text(region),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedGrid = value!;
+                          });
+                        },
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                        dropdownColor: Colors.white,
+                      ),
+                      const SizedBox(width: 20),
+                      const Spacer(),
+                      Container(
+                        height: 40,
+                        width: 2,
+                        color: Colors.grey[200],
+                      ),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            performingAnalysis = !performingAnalysis;
+                          });
+                        },
+                        child: const Text("Generate Report"),
+                      ),
+                    ],
+                  ),
+                ),
+              // HERE
+
               const SizedBox(height: 20),
               if (performingAnalysis == true)
                 const Text("Analyzing Data...")
