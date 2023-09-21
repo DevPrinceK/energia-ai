@@ -1,5 +1,12 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously,
+
+import 'dart:math';
+
 import 'package:energia_dashboard/components/desktop/desktop_footer.dart';
+import 'package:energia_dashboard/network/endpoints.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class DesktopPredictContent extends StatefulWidget {
   const DesktopPredictContent({super.key});
@@ -16,6 +23,10 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
   String selectedTown = "Town One";
   String selectedGrid = "Grid One";
   DateTime _selectedDate = DateTime.now();
+
+  // response
+  String prediction = "";
+  var predictionData = {};
 
   List<String> regions = [
     "Ahafo Region",
@@ -72,6 +83,83 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
       setState(() {
         _selectedDate = pickedDate;
       });
+    }
+  }
+
+  Future<int> makePrediction() async {
+    print("Predicting...");
+    // start loading
+    setState(() {
+      performingPrediction = true;
+    });
+
+    try {
+      print("trying prediction api...");
+      // Make API call
+      var url = Uri.parse(APIEndpoints.predictPowerOutage);
+      // simulate power generation and consumption
+      var consumption = Random().nextInt(500) + 500;
+      var generation = Random().nextInt(500) + 500;
+      var response = await http.post(
+        url,
+        body: {
+          "data": [
+            {
+              "Date": _selectedDate.toString(),
+              "Region": selectedRegion,
+              "District": selectedDistrict,
+              "Town": selectedTown,
+              "Grid": selectedGrid,
+              "Power_Consumption_MWh": consumption,
+              "Power_Generation_MWh": generation
+            }
+          ],
+        },
+      );
+
+      // stop loading
+      setState(() {
+        performingPrediction = false;
+      });
+
+      if (response.statusCode == 200) {
+        // Login successful
+        print("prediction successful");
+        var data = jsonDecode(response.body);
+        var reqData = data["data"][0];
+        var resPrediction = data["prediction"][0]; // from response
+        setState(() {
+          predictionData = reqData;
+          prediction = resPrediction;
+        });
+        print(predictionData);
+        print(prediction);
+        print(response.statusCode);
+        return response.statusCode;
+      } else {
+        // prediction failed
+        print("Prediction failed");
+        print(response.statusCode);
+        print(response.reasonPhrase);
+        return response.statusCode;
+      }
+    } catch (e) {
+      print("Catching error in prediction api...");
+      print(e);
+      // Handle exceptions by displaying a Snackbar
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("An Error Occurred: $e"),
+        ),
+      );
+
+      // Stop loading
+      setState(() {
+        performingPrediction = false;
+      });
+
+      // Return an error code or handle it as needed
+      return -1;
     }
   }
 
@@ -253,7 +341,6 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                         ],
                       ),
                     ),
-                    // const SizedBox(height: 20),
                     const Spacer(),
                     Container(
                       height: 40,
@@ -261,7 +348,6 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                       color: Colors.grey[200],
                     ),
                     const SizedBox(width: 20),
-                    // const Spacer(),
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
@@ -298,26 +384,26 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const ListTile(
-                              leading: Icon(Icons.recycling_rounded),
-                              title: Text("Region"),
-                              subtitle: Text("Volta Region"),
+                            ListTile(
+                              leading: const Icon(Icons.recycling_rounded),
+                              title: const Text("Region"),
+                              subtitle: Text(predictionData["Region"]),
                             ),
-                            const ListTile(
-                              leading:
-                                  Icon(Icons.local_convenience_store_sharp),
-                              title: Text("District"),
-                              subtitle: Text("District One"),
+                            ListTile(
+                              leading: const Icon(
+                                  Icons.local_convenience_store_sharp),
+                              title: const Text("District"),
+                              subtitle: Text(predictionData["District"]),
                             ),
-                            const ListTile(
-                              leading: Icon(Icons.house),
-                              title: Text("Town"),
-                              subtitle: Text("Town One"),
+                            ListTile(
+                              leading: const Icon(Icons.house),
+                              title: const Text("Town"),
+                              subtitle: Text(predictionData["Town"]),
                             ),
-                            const ListTile(
-                              leading: Icon(Icons.grid_3x3),
-                              title: Text("Grid Station"),
-                              subtitle: Text("Grid One"),
+                            ListTile(
+                              leading: const Icon(Icons.grid_3x3),
+                              title: const Text("Grid Station"),
+                              subtitle: Text(predictionData["Grid"]),
                             ),
                             const SizedBox(height: 20),
                             // horizontal line
@@ -326,9 +412,9 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                               child: Container(color: Colors.black54),
                             ),
                             const SizedBox(height: 20),
-                            const ListTile(
-                              leading: Icon(Icons.notification_add),
-                              title: Text(
+                            ListTile(
+                              leading: const Icon(Icons.notification_add),
+                              title: const Text(
                                 "Prediction Remarks",
                                 style: TextStyle(
                                   fontSize: 16,
@@ -336,8 +422,10 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                                 ),
                               ),
                               subtitle: Text(
-                                "There won't be any power outage in the next 24 hours",
-                                style: TextStyle(
+                                prediction == "No"
+                                    ? "There won't be any power outage in the said time period."
+                                    : "There will be a power outage in the said time period.",
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -365,7 +453,9 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                             ),
                             const SizedBox(height: 20),
                             Image.asset(
-                              "assets/images/light-on-2.png",
+                              prediction == "No"
+                                  ? "assets/images/light-on-2.png"
+                                  : "assets/images/light-off-2.png",
                               height: 400,
                               width: 400,
                             ),
