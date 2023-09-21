@@ -25,7 +25,7 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
   DateTime _selectedDate = DateTime.now();
 
   // response
-  String prediction = "";
+  var prediction = "";
   var predictionData = {};
 
   List<String> regions = [
@@ -100,21 +100,25 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
       // simulate power generation and consumption
       var consumption = Random().nextInt(500) + 500;
       var generation = Random().nextInt(500) + 500;
+
+      final Map<String, dynamic> requestData = {
+        "data": [
+          {
+            "Date": _selectedDate.toString(),
+            "Region": selectedRegion.toString(),
+            "District": selectedDistrict.toString(),
+            "Town": selectedTown.toString(),
+            "Grid": selectedGrid.toString(),
+            "Power_Consumption_MWh": consumption.toString(),
+            "Power_Generation_MWh": generation.toString(),
+          }
+        ],
+      };
+      final String requestBody = jsonEncode(requestData);
       var response = await http.post(
         url,
-        body: {
-          "data": [
-            {
-              "Date": _selectedDate.toString(),
-              "Region": selectedRegion,
-              "District": selectedDistrict,
-              "Town": selectedTown,
-              "Grid": selectedGrid,
-              "Power_Consumption_MWh": consumption,
-              "Power_Generation_MWh": generation
-            }
-          ],
-        },
+        headers: {'Content-Type': 'application/json'},
+        body: requestBody,
       );
 
       // stop loading
@@ -126,11 +130,17 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
         // Login successful
         print("prediction successful");
         var data = jsonDecode(response.body);
+        print("Printing data and data[0]...]");
+        print(data["data"]);
+        print(data["data"][0]);
+        print("Printing prediction and prediction[0]...]");
+        print(data["predictions"]);
+        print(data["predictions"][0]);
         var reqData = data["data"][0];
-        var resPrediction = data["prediction"][0]; // from response
+        var resPrediction = data["predictions"][0]; // from response
         setState(() {
           predictionData = reqData;
-          prediction = resPrediction;
+          prediction = resPrediction.toString();
         });
         print(predictionData);
         print(prediction);
@@ -349,10 +359,9 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                     ),
                     const SizedBox(width: 20),
                     ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          performingPrediction = !performingPrediction;
-                        });
+                      onPressed: () async {
+                        // predict power outage
+                        await makePrediction();
                       },
                       child: const Text("Make Prediction"),
                     ),
@@ -383,35 +392,52 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 15),
                             ListTile(
                               leading: const Icon(Icons.recycling_rounded),
                               title: const Text("Region"),
-                              subtitle: Text(predictionData["Region"]),
+                              subtitle:
+                                  Text(predictionData["Region"].toString()),
                             ),
                             ListTile(
                               leading: const Icon(
                                   Icons.local_convenience_store_sharp),
                               title: const Text("District"),
-                              subtitle: Text(predictionData["District"]),
+                              subtitle:
+                                  Text(predictionData["District"].toString()),
                             ),
                             ListTile(
                               leading: const Icon(Icons.house),
                               title: const Text("Town"),
-                              subtitle: Text(predictionData["Town"]),
+                              subtitle: Text(predictionData["Town"].toString()),
                             ),
                             ListTile(
                               leading: const Icon(Icons.grid_3x3),
                               title: const Text("Grid Station"),
-                              subtitle: Text(predictionData["Grid"]),
+                              subtitle: Text(predictionData["Grid"].toString()),
                             ),
-                            const SizedBox(height: 20),
+                            ListTile(
+                              leading: const Icon(Icons.solar_power_outlined),
+                              title: const Text("Power Generation (MWh)"),
+                              subtitle: Text(
+                                  predictionData["Power_Generation_MWh"]
+                                      .toString()),
+                            ),
+                            ListTile(
+                              leading:
+                                  const Icon(Icons.settings_power_outlined),
+                              title: const Text("Power Consumption (MWh)"),
+                              subtitle: Text(
+                                  predictionData["Power_Consumption_MWh"]
+                                      .toString()),
+                            ),
+                            const SizedBox(height: 10),
                             // horizontal line
                             SizedBox(
                               height: 1,
                               child: Container(color: Colors.black54),
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 10),
                             ListTile(
                               leading: const Icon(Icons.notification_add),
                               title: const Text(
@@ -436,34 +462,52 @@ class _DesktopPredictContentState extends State<DesktopPredictContent> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: deviceWidth * 0.36,
-                    height: deviceWidth * 0.36,
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            const Text(
-                              "Prediction",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                  performingPrediction
+                      ? const Center(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              SizedBox(
+                                height: 200,
+                                width: 200,
+                                child: CircularProgressIndicator(),
+                              ),
+                              Center(
+                                child: Text(
+                                  "Predicting...",
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SizedBox(
+                          width: deviceWidth * 0.36,
+                          height: deviceWidth * 0.36,
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  const Text(
+                                    "Prediction",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Image.asset(
+                                    prediction == "No"
+                                        ? "assets/images/light-on-2.png"
+                                        : "assets/images/light-off-2.png",
+                                    height: 400,
+                                    width: 400,
+                                  ),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 20),
-                            Image.asset(
-                              prediction == "No"
-                                  ? "assets/images/light-on-2.png"
-                                  : "assets/images/light-off-2.png",
-                              height: 400,
-                              width: 400,
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
               const SizedBox(height: 10),
