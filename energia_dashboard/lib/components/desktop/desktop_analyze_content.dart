@@ -1,7 +1,7 @@
 import 'package:energia_dashboard/charts/desktop/districts_chart.dart';
-import 'package:energia_dashboard/charts/desktop/population_chart.dart';
+import 'package:energia_dashboard/charts/desktop/districts_power_chart.dart';
+import 'package:energia_dashboard/charts/desktop/dummy_chart.dart';
 import 'package:energia_dashboard/charts/desktop/power_chart.dart';
-import 'package:energia_dashboard/charts/desktop/towns_chart.dart';
 import 'package:energia_dashboard/components/desktop/desktop_footer.dart';
 import 'package:flutter/material.dart';
 
@@ -237,6 +237,10 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                         onChanged: (value) {
                           setState(() {
                             selectedRegion = value!;
+                            activeChart = DummyChart(
+                              heightFactor: 0.3,
+                              selectedRegion: selectedRegion,
+                            );
                           });
                         },
                         style: const TextStyle(
@@ -256,7 +260,30 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                       ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            performingAnalysis = !performingAnalysis;
+                            // performingAnalysis = !performingAnalysis;
+                            // remove current chart
+                            activeChart = const Center(
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      "Analyzing...",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                            // set the actual chart to be displayed
+                            activeChart = DistrictsPowerChart(
+                              heightFactor: 0.3,
+                              selectedRegion: selectedRegion,
+                            );
                           });
                         },
                         child: const Text("Generate Report"),
