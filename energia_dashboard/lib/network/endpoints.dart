@@ -3,4 +3,6 @@ class APIEndpoints {
   static const String login = "${baseUrl}account/login/";
   static const String powerByAllRegions = "${baseUrl}api/power-by-all-regions/";
   static const String predictPowerOutage = "${baseUrl}api/predict-outage/";
+  static const String powerByDistrictsInRegion =
+      "${baseUrl}api/power-by-districts-in-region/";
 }
