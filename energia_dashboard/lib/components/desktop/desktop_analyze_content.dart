@@ -1,7 +1,8 @@
-import 'package:energia_dashboard/charts/desktop/districts_chart.dart';
 import 'package:energia_dashboard/charts/desktop/districts_power_chart.dart';
 import 'package:energia_dashboard/charts/desktop/dummy_chart.dart';
+import 'package:energia_dashboard/charts/desktop/grid_power_chart.dart';
 import 'package:energia_dashboard/charts/desktop/power_chart.dart';
+import 'package:energia_dashboard/charts/desktop/town_power_chart.dart';
 import 'package:energia_dashboard/components/desktop/desktop_footer.dart';
 import 'package:flutter/material.dart';
 
@@ -338,6 +339,11 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                         onChanged: (value) {
                           setState(() {
                             selectedTown = value!;
+                            // reset the chart widget
+                            activeChart = DummyChart(
+                              heightFactor: 0.3,
+                              selectedRegion: selectedRegion,
+                            );
                           });
                         },
                         style: const TextStyle(
@@ -357,7 +363,11 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                       ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            performingAnalysis = !performingAnalysis;
+                            activeChart = TownPowerChart(
+                              heightFactor: 0.3,
+                              selectedRegion: selectedRegion,
+                              selectedTown: selectedTown,
+                            );
                           });
                         },
                         child: const Text("Generate Report"),
@@ -412,6 +422,11 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                         onChanged: (value) {
                           setState(() {
                             selectedGrid = value!;
+                            // reset chart
+                            activeChart = DummyChart(
+                              heightFactor: 0.3,
+                              selectedRegion: selectedRegion,
+                            );
                           });
                         },
                         style: const TextStyle(
@@ -431,7 +446,12 @@ class _DesktopAnalyzeContentState extends State<DesktopAnalyzeContent> {
                       ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            performingAnalysis = !performingAnalysis;
+                            // performingAnalysis = !performingAnalysis;
+                            activeChart = GridPowerChart(
+                              heightFactor: 0.3,
+                              selectedRegion: selectedRegion,
+                              selectedGrid: selectedGrid,
+                            );
                           });
                         },
                         child: const Text("Generate Report"),
