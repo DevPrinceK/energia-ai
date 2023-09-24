@@ -1,9 +1,35 @@
 import 'package:energia_dashboard/components/desktop/desktop_analyze_content.dart';
 import 'package:energia_dashboard/components/desktop/desktop_sidebar.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class DesktopAnalyze extends StatelessWidget {
+class DesktopAnalyze extends StatefulWidget {
   const DesktopAnalyze({super.key});
+
+  @override
+  State<DesktopAnalyze> createState() => _DesktopAnalyzeState();
+}
+
+class _DesktopAnalyzeState extends State<DesktopAnalyze> {
+  String userFullname = "";
+  String userEmail = "";
+  String userToken = "";
+
+  void getUserInfo() async {
+    // initialize shared preferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userEmail = prefs.getString("email")!;
+      userFullname = prefs.getString("fullname")!;
+      userToken = prefs.getString("token")!;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +56,15 @@ class DesktopAnalyze extends StatelessWidget {
               ),
               color: Colors.black,
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  "princesamuel@gmail.com",
-                  style: TextStyle(color: Colors.white),
+                  userEmail,
+                  style: const TextStyle(color: Colors.white),
                 ),
-                SizedBox(width: 5),
-                CircleAvatar(
+                const SizedBox(width: 5),
+                const CircleAvatar(
                   child: Icon(Icons.person),
                 ),
               ],
