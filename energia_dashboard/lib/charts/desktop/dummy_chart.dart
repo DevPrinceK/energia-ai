@@ -50,7 +50,7 @@ class _DummyChartState extends State<DummyChart> {
               child: SfCartesianChart(
                 primaryXAxis: CategoryAxis(
                   labelRotation: 45,
-                  title: AxisTitle(text: "Districts"),
+                  title: AxisTitle(text: widget.selectedRegion),
                 ),
                 primaryYAxis: NumericAxis(title: AxisTitle(text: "Power")),
                 series: <ChartSeries<DistrictData, String>>[
@@ -77,8 +77,9 @@ class _DummyChartState extends State<DummyChart> {
                     color: Colors.green,
                   ),
                 ],
-                legend: const Legend(
-                  title: LegendTitle(text: "Power Statistics for Districts"),
+                legend: Legend(
+                  title: LegendTitle(
+                      text: "Power Statistics for ${widget.selectedRegion}"),
                   isResponsive: true,
                   isVisible: true,
                   position: LegendPosition.top,
