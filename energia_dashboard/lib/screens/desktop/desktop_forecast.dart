@@ -1,9 +1,35 @@
 import 'package:energia_dashboard/components/desktop/desktop_forecast_content.dart';
 import 'package:energia_dashboard/components/desktop/desktop_sidebar.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class DesktopForecast extends StatelessWidget {
+class DesktopForecast extends StatefulWidget {
   const DesktopForecast({super.key});
+
+  @override
+  State<DesktopForecast> createState() => _DesktopForecastState();
+}
+
+class _DesktopForecastState extends State<DesktopForecast> {
+  String userFullname = "";
+  String userEmail = "";
+  String userToken = "";
+
+  void getUserInfo() async {
+    // initialize shared preferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userEmail = prefs.getString("email")!;
+      userFullname = prefs.getString("fullname")!;
+      userToken = prefs.getString("token")!;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +56,15 @@ class DesktopForecast extends StatelessWidget {
               ),
               color: Colors.black,
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  "princesamuel@gmail.com",
-                  style: TextStyle(color: Colors.white),
+                  userEmail,
+                  style: const TextStyle(color: Colors.white),
                 ),
-                SizedBox(width: 5),
-                CircleAvatar(
+                const SizedBox(width: 5),
+                const CircleAvatar(
                   child: Icon(Icons.person),
                 ),
               ],
