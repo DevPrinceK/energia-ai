@@ -8,4 +8,6 @@ class APIEndpoints {
       "${baseUrl}api/power-by-districts-in-region/";
   static const String townPowerAnalysis =
       "${baseUrl}api/power-by-town-in-region/";
+  static const String gridPowerAnalysis =
+      "${baseUrl}api/power-by-grid-in-region/";
 }
