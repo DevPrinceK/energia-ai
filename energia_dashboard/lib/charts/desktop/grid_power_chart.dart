@@ -35,7 +35,7 @@ class _GridPowerChartState extends State<GridPowerChart> {
 
     try {
       // Make API call
-      var url = Uri.parse(APIEndpoints.townPowerAnalysis);
+      var url = Uri.parse(APIEndpoints.gridPowerAnalysis);
       var response = await http.post(
         url,
         body: {
