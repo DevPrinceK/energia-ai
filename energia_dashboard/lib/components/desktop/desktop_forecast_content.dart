@@ -1,6 +1,6 @@
 import 'package:energia_dashboard/components/desktop/desktop_footer.dart';
-import 'package:energia_dashboard/network/endpoints.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class DesktopForecastContent extends StatefulWidget {
   const DesktopForecastContent({Key? key});
@@ -19,40 +19,40 @@ class _DesktopForecastContentState extends State<DesktopForecastContent> {
   List<Map<String, dynamic>> dailyForecastData = [
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
@@ -63,200 +63,200 @@ class _DesktopForecastContentState extends State<DesktopForecastContent> {
   List<Map<String, dynamic>> thisWeekForecastData = [
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
@@ -267,400 +267,400 @@ class _DesktopForecastContentState extends State<DesktopForecastContent> {
   List<Map<String, dynamic>> thisMonthForecastData = [
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-24",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-25",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-26",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-27",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 1",
       "grid": "Grid 1",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 2",
       "grid": "Grid 2",
       "power_outage": "No"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 3",
       "grid": "Grid 3",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 4",
       "grid": "Grid 4",
       "power_outage": "Yes"
     },
     {
       "date": "2023-09-28",
-      "consumption": 0.0,
-      "generation": 0.0,
+      "consumption": Random().nextInt(500) + 500,
+      "generation": Random().nextInt(500) + 500,
       "region": "Region 5",
       "grid": "Grid 5",
       "power_outage": "No"
@@ -882,7 +882,7 @@ class _DesktopForecastContentState extends State<DesktopForecastContent> {
                                     ),
                                     Center(
                                       child: Text(
-                                        "Analyzing...",
+                                        "Forecasting...",
                                       ),
                                     ),
                                   ],
@@ -932,7 +932,7 @@ class _DesktopForecastContentState extends State<DesktopForecastContent> {
                                     ),
                                     Center(
                                       child: Text(
-                                        "Analyzing...",
+                                        "Forecasting...",
                                       ),
                                     ),
                                   ],
